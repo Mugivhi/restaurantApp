@@ -1,19 +1,22 @@
-import { View, Text,StyleSheet,TouchableOpacity } from 'react-native';
+import { View, Text,StyleSheet,TouchableOpacity,TextInput } from 'react-native';
 import Icon from "react-native-vector-icons/Ionicons";
 import React from 'react'
+import { useNavigation } from '@react-navigation/native';
 
 const Bookings = () => {
+    const navigation = useNavigation();
     // const {recipe} = route.params;
   return (
-    <View>
+    <View style={styles.container1}>
         {/* <View styel={styles.image}>
                 <Image style={styles.image}
                 source={{uri:`${recipe.image}`}}/>
-            
-        <View>
-            <Text style={styles.sizes}>{`${recipe.label}`}</Text>
-        </View>
         </View> */}
+        <View>
+            <TextInput placeholder='date'/>
+            <TextInput placeholder='time'/>
+            <TextInput placeholder='guest'/>
+        </View>
     <View style={styles.container}>
        <View style={styles.seconsVieww}>
             <TouchableOpacity onPress={()=>{navigation.navigate('Home')}}>
@@ -53,15 +56,19 @@ const styles = StyleSheet.create({
         flex:1,
         justifyContent:'center',
         alignItems:'center',
-        backgroundColor:'#242422'
+        backgroundColor:'#242422',
           
+    },
+    container1:{
+        justifyContent:'space-between',
+        alignSelf:"baseline",
+        bottom:0
     },
     seconsVieww:{
         flexDirection:'row',
         backgroundColor:'#242422',
         justifyContent:'space-between',
         width:"100%",
-        position:'fixed',
         bottom:0,
         alignSelf:'baseline'
     },

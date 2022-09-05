@@ -1,10 +1,12 @@
 import React from "react";
 import { ScrollView, Text, StyleSheet,View ,Image,TouchableOpacity} from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import { useNavigation } from '@react-navigation/native';
 
 
 const Reviewpage=({route})=>{
     const {recipe} = route.params;
+    const navigation = useNavigation();
 
     return(
       
@@ -22,6 +24,7 @@ const Reviewpage=({route})=>{
               Cusine:  Seafood, Steakhouse, Greekfood
            </Text>
         </View>
+        <ScrollView>
         <View style={styles.item}>
         <Icon
                name="ios-world"
@@ -30,6 +33,7 @@ const Reviewpage=({route})=>{
             />
            <Text style={styles.size}>
             website:
+            {/* <Text style={styles.ingredients}>{`${recipe.uri}`}</Text> */}
            </Text>
         </View>
         <View style={styles.item}>
@@ -79,8 +83,8 @@ look like readable English.
             </TouchableOpacity>
         </View>
         <View>
-            
         </View>
+        </ScrollView>
         {/* <View style={styles.item}>
             <Text style={styles.sizes}>
                 Ingredients:
@@ -177,13 +181,13 @@ const styles=StyleSheet.create({
     },
     sizes:{
         fontSize:22,
-        fontFamily:'comfortaa',
+        // fontFamily:'comfortaa',
          color:'white',
          fontWeight:'800'
     },
     size:{
         fontSize:25,
-        fontFamily:'comfortaa',
+        // fontFamily:'comfortaa',
         color:'white',
         fontWeight:'800'
     },
@@ -204,7 +208,7 @@ const styles=StyleSheet.create({
         backgroundColor:'#242422',
         justifyContent:'space-between',
         width:"100%",
-        position:'fixed',
+        // position:'fixed',
         bottom:0,
         alignSelf:'baseline'
     },
@@ -225,7 +229,7 @@ const styles=StyleSheet.create({
         width:'100%',
         textAlign:'center',
         paddingTop:15,
-        fontStyle:'comfortaa',
+        // fontStyle:'comfortaa',
         fontWeight:4,
         height:50,
         borderRadius:20

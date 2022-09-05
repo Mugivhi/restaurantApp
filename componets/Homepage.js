@@ -47,9 +47,9 @@ const Homepage=({navigation})=>{
        
         </TouchableOpacity>
         </View>
-        <SafeAreaView style={styles.safe}>
+        <View style={styles.safe}>
             {loading ? <ActivityIndicator style={styles.active}/>:
-            <FlatList
+            <FlatList style={styles.list}
             data={recipes}
             renderItem={({item})=>(
                 <View style={styles.recipe}>
@@ -65,8 +65,9 @@ const Homepage=({navigation})=>{
                     </View>
                 </View>
             )}
-            keyExtractor={(item,index)=>index.toString()}/>}
-        </SafeAreaView>
+            keyExtractor={(item,index)=>index.toString()}
+            numColumns={2}/>}
+        </View>
         <View style={styles.seconsVieww}>
             <TouchableOpacity onPress={()=>{navigation.navigate('Home')}}>
             <Icon
@@ -112,18 +113,22 @@ const styles = StyleSheet.create({
         width:'90%' ,
         color:'#40e0d0'
     },
+    list:{
+        width:'100%'
+    },
     active:{
         size:'large',
          color:'#40e0d0'
     },
     safe:{
         flex:1,
-        flexDirection:'row',
+        width:'100%',
+        padding:6
     },
     detailss:{
-        marginLeft:50,
+        marginLeft:5,
         fontSize:20,
-        color:'#black'
+        color:'black'
     },
     view4:{
         padding:20,
@@ -146,7 +151,7 @@ const styles = StyleSheet.create({
         borderRadius:20,
         paddingLeft:15,
         fontSize:20,
-        fontFamily: 'Comfortaa',
+        // fontFamily: 'Comfortaa',
         fontStyle: 'normal'
     },
     // inputField1:{
@@ -172,16 +177,16 @@ const styles = StyleSheet.create({
     buttonText:{
         color:'white',
         fontSize:20,
-        fontFamily:'comfortaa',
+        // fontFamily:'comfortaa',
         fontWeight:'bold'
     },
     image:{
         width:'100%',
-        height:200,
+        height:150,
     },
     lable:{
         fontSize:15,
-        fontFamily:'comfortaa',
+        // fontFamily:'comfortaa',
         width:'60%',
         color:'black',
         fontWeight:'700',
@@ -190,10 +195,9 @@ const styles = StyleSheet.create({
         shadowColor:'black',
         shadowOpacity:0.26,
         shadowRadius:8,
-        elevation:5,
+        width:'50%',
+        margin:6,
         backgroundColor:'white',
-        margin:10,
-        marginTop:40,
     },
     seconsVieww:{
         flexDirection:'row',
@@ -203,7 +207,7 @@ const styles = StyleSheet.create({
     underIcon:{
         color:'white',
         alignItems:'center',
-        fontFamily:'comfortaa',
+        // fontFamily:'comfortaa',
         justifyContent:'center',
         marginLeft:6,
         marginBottom:6
