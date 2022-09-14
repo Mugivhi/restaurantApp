@@ -7,7 +7,7 @@ const Bookings = () => {
     const navigation = useNavigation();
     // const {recipe} = route.params;
   return (
-    <View style={styles.container1}>
+    <View style={styles.container}>
         {/* <View styel={styles.image}>
                 <Image style={styles.image}
                 source={{uri:`${recipe.image}`}}/>
@@ -17,7 +17,7 @@ const Bookings = () => {
             <TextInput placeholder='time'/>
             <TextInput placeholder='guest'/>
         </View>
-    <View style={styles.container}>
+    <View style={styles.container1}>
        <View style={styles.seconsVieww}>
             <TouchableOpacity onPress={()=>{navigation.navigate('Home')}}>
             <Icon
@@ -59,11 +59,11 @@ const styles = StyleSheet.create({
         backgroundColor:'#242422',
           
     },
-    container1:{
-        justifyContent:'space-between',
-        alignSelf:"baseline",
-        bottom:0
-    },
+    // container1:{
+    //     justifyContent:'space-between',
+    //     alignSelf:"baseline",
+    //     bottom:0
+    // },
     seconsVieww:{
         flexDirection:'row',
         backgroundColor:'#242422',
