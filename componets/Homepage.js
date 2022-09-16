@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { View,Text, StyleSheet,TextInput, TouchableOpacity, Keyboard, ActivityIndicator,FlatList, SafeAreaView,Image } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import { collection, doc, setDoc } from "firebase/firestore"; 
+
 
 const Homepage=({navigation})=>{
     const [recipes, setRecipes]=useState();
@@ -10,6 +12,7 @@ const Homepage=({navigation})=>{
     const apiId = 'bb8681be'
     const apiKey = `68604c75c32e9d741e1e6a880e3d0866`;
     const apiUrl = `https://api.edamam.com/search?q=${searchQuery}&app_id=${apiId}&app_key=${apiKey}&to=${numberOfRecipes}&calories=591-722&health=alcohol-free`;
+    // const [apiId,setApi]=useState('')
 
     async function callApi(){
         setLoading(true);
@@ -19,6 +22,31 @@ const Homepage=({navigation})=>{
         setLoading(false)
         Keyboard.dismiss()
         setSearchQuery('')
+        
+const restaurant = collection(this.db, "cities");
+
+// await setDoc(doc(citiesRef, "SF"), {
+//     name: "San Francisco", state: "CA", country: "USA",
+//     capital: false, population: 860000,
+//     regions: ["west_coast", "norcal"] });
+// await setDoc(doc(citiesRef, "LA"), {
+//     name: "Los Angeles", state: "CA", country: "USA",
+//     capital: false, population: 3900000,
+//     regions: ["west_coast", "socal"] });
+// await setDoc(doc(citiesRef, "DC"), {
+//     name: "Washington, D.C.", state: null, country: "USA",
+//     capital: true, population: 680000,
+//     regions: ["east_coast"] });
+// await setDoc(doc(citiesRef, "TOK"), {
+//     name: "Tokyo", state: null, country: "Japan",
+//     capital: true, population: 9000000,
+//     regions: ["kanto", "honshu"] });
+await setDoc(doc(restaurant, "id"), {
+    // name: "Beijing", state: null, country: "China",
+    // capital: true, population: 21500000,
+    // regions: ["jingjinji", "hebei"] 
+    name:"kfc"
+});
     }
     useEffect(()=>{
         setLoading(false)

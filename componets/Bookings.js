@@ -3,8 +3,8 @@ import Icon from "react-native-vector-icons/Ionicons";
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 
-const Bookings = () => {
-    const navigation = useNavigation();
+const Bookings = ({navigation}) => {
+    // const navigation = useNavigation();
     // const {recipe} = route.params;
   return (
     <View style={styles.container}>
@@ -17,8 +17,7 @@ const Bookings = () => {
             <TextInput placeholder='time'/>
             <TextInput placeholder='guest'/>
         </View>
-    <View style={styles.container1}>
-       <View style={styles.seconsVieww}>
+        <View style={styles.seconsVieww}>
             <TouchableOpacity onPress={()=>{navigation.navigate('Home')}}>
             <Icon
                name="ios-home"
@@ -45,7 +44,6 @@ const Bookings = () => {
              <Text style={styles.underIcon}>bookings</Text>
             </TouchableOpacity>
         </View>
-    </View>
     </View>
   )
 }
