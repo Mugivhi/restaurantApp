@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+import { getDatabase } from "firebase/database";
+import {getAuth} from 'firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -9,6 +10,7 @@ import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
   apiKey: "AIzaSyAnWw4NUlh9oYKLjt856EE0DYgtUe-5Rbg",
   authDomain: "restaurant-app-6e04f.firebaseapp.com",
+  databaseURL: "https://restaurant-app-6e04f-default-rtdb.firebaseio.com",
   projectId: "restaurant-app-6e04f",
   storageBucket: "restaurant-app-6e04f.appspot.com",
   messagingSenderId: "327977135204",
@@ -17,5 +19,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+// console.log(process.env)
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+export  const auth = getAuth(app);
+export const db = getDatabase(app);

@@ -1,29 +1,86 @@
 import React, { useEffect, useState } from "react";
 import { View,Text, StyleSheet,TextInput, TouchableOpacity, Keyboard, ActivityIndicator,FlatList, SafeAreaView,Image } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import { collection, doc, setDoc } from "firebase/firestore"; 
+import { getDatabase, ref, onValue,child,get } from "firebase/database";
+import { db,auth } from "../firebase";
 
 
 const Homepage=({navigation})=>{
+    const db = getDatabase();
+        const [ojbHandler, setObjHandler] = useState([]);
+        const arrObj = [];
+      
+        useEffect(() => {
+          
+              // read
+          const dbRef = ref(getDatabase());
+          get(child(dbRef, `restaurants`)).then((snapshot) => {
+         if (snapshot.exists()) {
+          console.log(snapshot.val());
+          let keys = Object.keys(snapshot.val())
+          const Key = snapshot.key;
+          const Data = snapshot.val();
+    
+          let arr = []
+          for (var x = 0; x < keys.length; x++){
+            arr.push(Data[keys[x]])
+          }
+          console.log(arr)
+          setObjHandler(arr);
+    
+        //   snapshot.forEach((Data) => {
+        //   const childDatas = Data.val();
+        //   let results =  childDatas;
+        //   let arr = [];
+        //   const obj  = results;
+        //   arrObj.push(arr)
+        //   console.log(arrObj);
+    
+        //   console.log(arr);
+    
+        //   // Data.forEach((childDatas) =>{
+        //   //   const Datas = childDatas.key;
+        //   //   const Keys = childDatas.val();
+         
+           
+        //   // })
+    
+          
+    
+        // })
+         
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+            
+            
+          },[]);
     const [recipes, setRecipes]=useState();
     const [searchQuery, setSearchQuery]=useState('');
     const [numberOfRecipes, setNumberOfRecipes]=useState('100');
     const [loading, setLoading]=useState(false);
-    const apiId = 'bb8681be'
-    const apiKey = `68604c75c32e9d741e1e6a880e3d0866`;
-    const apiUrl = `https://api.edamam.com/search?q=${searchQuery}&app_id=${apiId}&app_key=${apiKey}&to=${numberOfRecipes}&calories=591-722&health=alcohol-free`;
+    // const apiId = 'bb8681be'
+    // const apiKey = `68604c75c32e9d741e1e6a880e3d0866`;
+    // const apiUrl = `https://api.edamam.com/search?q=${searchQuery}&app_id=${apiId}&app_key=${apiKey}&to=${numberOfRecipes}&calories=591-722&health=alcohol-free`;
     // const [apiId,setApi]=useState('')
+    // const apiUrl = `https://console.firebase.google.com/project/restaurant-app-6e04f/firestore/data/~2Frestaurant-list~2FMH8Vth8jZjHNHYrQ6wWH`;
+
 
     async function callApi(){
-        setLoading(true);
-        let response = await fetch(apiUrl);
-        let responseJson = await response.json();
-        setRecipes(responseJson.hits);
-        setLoading(false)
-        Keyboard.dismiss()
-        setSearchQuery('')
+        // setLoading(true);
+        // let responseJson = await response.json();
+        // setRecipes(responseJson.hits);
+        // setLoading(false)
+        // Keyboard.dismiss()
+        // setSearchQuery('')
         
-const restaurant = collection(this.db, "cities");
+
+
+        
+// const restaurant = collection(this.db, "cities");
 
 // await setDoc(doc(citiesRef, "SF"), {
 //     name: "San Francisco", state: "CA", country: "USA",
@@ -41,12 +98,12 @@ const restaurant = collection(this.db, "cities");
 //     name: "Tokyo", state: null, country: "Japan",
 //     capital: true, population: 9000000,
 //     regions: ["kanto", "honshu"] });
-await setDoc(doc(restaurant, "id"), {
+// await setDoc(doc(restaurant, "id"), {
     // name: "Beijing", state: null, country: "China",
     // capital: true, population: 21500000,
     // regions: ["jingjinji", "hebei"] 
-    name:"kfc"
-});
+//     name:"kfc"
+// });
     }
     useEffect(()=>{
         setLoading(false)
@@ -57,6 +114,7 @@ await setDoc(doc(restaurant, "id"), {
         <Image style={styles.image}
          source={require('../assets/picture.png')}>
         </Image>
+      
         <View style={styles.seconsView}>
             <TextInput placeholder='Search...'
             style={[styles.inputField]}
@@ -75,27 +133,43 @@ await setDoc(doc(restaurant, "id"), {
        
         </TouchableOpacity>
         </View>
-        <View style={styles.safe}>
-            {loading ? <ActivityIndicator style={styles.active}/>:
-            <FlatList style={styles.list}
+        {ojbHandler.map((restaurant, inx)=>(
+            <View key={inx}>
+                <FlatList style={styles.list}
+                data={restaurant}
+                renderItem={(restaurant)=>(
+                    <View style={styles.recipe}>
+                        <Image style={styles.image}
+                       source={{uri:{}}}/>
+                        </View>
+                )}
+                numColumns={2}/>
+            </View>
+        ))}
+         
+        
+        {/* // <View style={styles.safe} key={inx}> */}
+            {/* {loading ? <ActivityIndicator style={styles.active}/>: */}
+            {/* <FlatList style={styles.list}
             data={recipes}
             renderItem={({item})=>(
                 <View style={styles.recipe}>
                     <Image style={styles.image}
-                    source={{uri:`${item.recipe.image}`}}/>
+                    source={{uri:`${restaurant.imag}`}}/>
                     <View style={styles.view4}>
-                        <Text style={styles.lable}>{`${item.recipe.label}`}</Text>
+                        <Text style={styles.lable}>hi</Text>
                         <TouchableOpacity onPress={()=>{navigation.navigate('Details',{recipe:item.recipe})}}>
                             <Text style={styles.detailss}>
                                 View
                             </Text>
                         </TouchableOpacity>
                     </View>
-                </View>
-            )}
-            keyExtractor={(item,index)=>index.toString()}
-            numColumns={2}/>}
-        </View>
+                </View> */}
+            {/* // )}
+            // keyExtractor={(item,index)=>index.toString()}
+            // numColumns={2}/>}
+        // </View> */}
+        {/* // ))} */}
         <View style={styles.seconsVieww}>
             <TouchableOpacity onPress={()=>{navigation.navigate('Home')}}>
             <Icon
