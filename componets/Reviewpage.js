@@ -1,145 +1,50 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { ScrollView, Text, StyleSheet,View ,Image,TouchableOpacity} from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from '@react-navigation/native';
+import {firebase} from '../firebase';
+// import { FlatList } from "react-native-web";
 
 
-const Reviewpage=({route})=>{
-    const {recipe} = route.params;
+// const Reviewpage=({route})=>{
+    // const {item} = route.params;
+    const Reviewpage=({route})=>{
+    // const {item} = route.params;
     const navigation = useNavigation();
+    const [users , setUsers]= useState([]);
+    const restaurantRef = firebase.firestore().collection('restaurants');
+   async function getData(){
+        restaurantRef
+        .onSnapshot(
+            querySnapshot=>{
+                const users = []
+                querySnapshot.forEach((doc)=>{
+                    const{ name,place, website,image} = doc.data()
+                    users.push({
+                        id:doc.id,
+                        name,
+                        // place,
+                        website,
+                        image,
+                    })
+                })
+                setUsers(users)
+            }
+        )
+    }
+    useEffect(()=>{
+        getData();
+    },[])
 
     return(
       
         <View style={styles.details}>
-        <View styel={styles.image}>
-                <Image style={styles.image}
-                source={{uri:`${recipe.image}`}}/>
-            
-        <View>
-            <Text style={styles.sizes}>{`${recipe.label}`}</Text>
-        </View>
-        </View>
-        <View style={styles.item}>
-           <Text style={styles.size}>
-              Cusine:  Seafood, Steakhouse, Greekfood
-           </Text>
-        </View>
-        <ScrollView>
-        <View style={styles.item}>
-        <Icon
-               name="ios-world"
-               color="#F2AD71"
-               size={20}
-            />
-           <Text style={styles.size}>
-            website:
-            {/* <Text style={styles.ingredients}>{`${recipe.uri}`}</Text> */}
-           </Text>
-        </View>
-        <View style={styles.item}>
-        <Icon
-               name="ios-call"
-               color="#F2AD71"
-               size={20}
-            />
-           <Text style={styles.size}>
-             Phone number:
-           </Text>
-        </View>
-        <View style={styles.item}>
-        <Icon
-               name="ios-mail"
-               color="#F2AD71"
-               size={20}
-            />
-           <Text style={styles.size}>
-             email:
-           </Text>
-        </View>
-        <View style={styles.item}>
-        <Icon
-               name="ios-location"
-               color="#F2AD71"
-               size={20}
-            />
-           <Text style={styles.size}>
-             Location:
-           </Text>
-        </View>
-        <View style={styles.item}>
-            <Text style={styles.downText}>
-            Lorem
-Ipsum is that it has 
-normal distribution 
-of letters, as opposed 
-to using 'Content here,
-content here', making it 
-look like readable English.
-            </Text>
-            <TouchableOpacity onPress={()=>{navigation.navigate('Bookings')}}
-              title="Book table"
-              style={styles.button}>
-                <Text>Book table</Text>
-            </TouchableOpacity>
-        </View>
-        <View>
-        </View>
-        </ScrollView>
-        {/* <View style={styles.item}>
-            <Text style={styles.sizes}>
-                Ingredients:
-            </Text>
-            <Text style={styles.ingredients}>{`${recipe.ingredients.map((item)=>item['food'])}`}</Text>
-        </View>
-
-        <View style={styles.item}>
-            <Text style={styles.sizes}>
-                Food category:
-            </Text>
-            <Text style={styles.ingredients}>{`${recipe.ingredients.map((item)=>item['foodCategory'])}`}</Text>
-        </View>
-
-        <View style={styles.item}>
-            <Text style={styles.sizes}>
-                Calories:
-            </Text>
-            <Text style={styles.ingredients}>{`${recipe.calories}`}</Text>
-        </View>
-
-        
-        <View style={styles.item}>
-            <Text style={styles.sizes}>
-                Meal Type:
-            </Text>
-            <Text style={styles.ingredients}>{`${recipe.mealType}`}</Text>
-        </View>
-
-        <View style={styles.item}>
-            <Text style={styles.sizes}>
-                Description:
-            </Text>
-            <Text style={styles.ingredients}>{`${recipe.ingredientLines}`}</Text>
-        </View>
-
-        <View style={styles.item}>
-            <Text style={styles.sizes}>
-               Diet Lable:
-            </Text>
-            <Text style={styles.ingredients}>{`${recipe.dietLabels}`}</Text>
-        </View>
-
-        <View style={styles.item}>
-            <Text style={styles.sizes}>
-                Cuisine Type:
-            </Text>
-            <Text style={styles.ingredients}>{`${recipe.cuisineType}`}</Text>
-        </View>
-        <View style={styles.item}>
-            <Text style={styles.sizes}>
-                Dish Type:
-            </Text>
-            <Text style={styles.ingredients}>{`${recipe.dishType}`}</Text>
-        </View> */}
+            {/* {renderItem=({item})=>(
+                <Text >
+                    {item.name}
+                </Text>
+                )} */}
+                <Text>{item.name}</Text>
         <View style={styles.seconsVieww}>
             <TouchableOpacity onPress={()=>{navigation.navigate('Home')}}>
             <Icon

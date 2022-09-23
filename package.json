@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.19.1",
     "@expo/webpack-config": "^0.17.0",
     "@react-navigation/native": "^6.0.12",
     "@react-navigation/native-stack": "^6.8.0",
@@ -23,7 +24,7 @@
     "sharp-cli": "^2.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.19.1"
   },
   "private": true
 }
