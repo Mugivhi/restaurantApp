@@ -44,7 +44,57 @@ import {firebase} from '../firebase';
                     {item.name}
                 </Text>
                 )} */}
-                <Text>{item.name}</Text>
+                {/* <Text>{item.name}</Text> */}
+                {/* <View style={styles.seconsView} data={users}
+                renderItem={({item})=>(
+                    <View>
+                        <Text style={styles.lable}>{item.place}</Text>
+                        <Text style={styles.lable}>{item.website}</Text>
+                    </View>
+                )}
+                /> */}
+                <View >
+                    {/* <Image
+                    /> */}
+                    <Text style={styles.texts}>name</Text>
+                    <Text style={styles.texts}>name</Text>
+                    <View style={styles.display}>
+                    <Icon
+                    name="ios-globe"
+                    color='#f2ad71'
+                    size={20}
+                    />
+                    <Text style={styles.texts}>website</Text>
+                    </View>
+                    <View style={styles.display}>
+                    <Icon
+                    name="ios-call"
+                    color='#f2ad71'
+                    size={20}
+                    />
+                    <Text style={styles.texts}>phone number</Text>
+                    </View>
+                    <View style={styles.display}>
+                    <Icon
+                    name="ios-mail"
+                    color='#f2ad71'
+                    size={20}
+                    />
+                    <Text style={styles.texts}>email</Text>
+                    </View>
+                    <View style={styles.display}>
+                    <Icon
+                    name="ios-location"
+                    color='#f2ad71'
+                    size={20}
+                    />
+                    <Text style={styles.texts}>location</Text>
+                    </View>
+                    <View>
+                        <Text style={styles.texts}>about restaurant</Text>
+                    </View>
+                    
+                </View>
         <View style={styles.seconsVieww}>
             <TouchableOpacity onPress={()=>{navigation.navigate('Home')}}>
             <Icon
@@ -79,6 +129,30 @@ export default Reviewpage;
 const styles=StyleSheet.create({
     details:{
         backgroundColor:'#242422',
+    },
+    lable:{
+        fontSize:15,
+        // fontFamily:'comfortaa',
+        width:'60%',
+        color:'black',
+        fontWeight:'700',
+    },
+    seconsView:{
+        marginTop:10,
+        marginBottom:10,
+        flexDirection:'row',
+        width:"100%",
+        height:'6.5%',
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    display:{
+        display:'flex',
+        flexDirection:'row',
+        margin:8
+    },
+    texts:{
+        color:'white'
     },
     image:{
         width:'100%',

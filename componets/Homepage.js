@@ -194,6 +194,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 const Homepage = ({navigation}) => {
     const [users , setUsers]= useState([]);
     const [loading, setLoading]=useState(false);
+    const [searchQuery, setSearchQuery]=useState('');
     const restaurantRef = firebase.firestore().collection('restaurants');
    async function getData(){
         restaurantRef
@@ -233,6 +234,7 @@ const Homepage = ({navigation}) => {
                 name="ios-search"
                 color="white"
                size={47}
+               onPress={searchQuery} 
             />
     </TouchableOpacity>
         </View>
@@ -248,13 +250,14 @@ const Homepage = ({navigation}) => {
                  source ={item.image}/>
                     <View style={styles.view4}>
                     <Text style={styles.lable}>{item.name}</Text>
-                        <TouchableOpacity onPress={()=>{navigation.navigate('Details',{recipe:item.recipe})}}>
+                    {/* <Text style={styles.lable}>{item.place}</Text>
+                    <Text style={styles.lable}>{item.website}</Text>
+                    <Text style={styles.lable}>{item.phone}</Text> */}
+                        <TouchableOpacity onPress={()=>{navigation.navigate('Details')}}>
                             <Text style={styles.detailss}>
                                 View
                             </Text>
                         </TouchableOpacity>
-             
-                <Text style={styles.itemHeading}>{item.place}</Text>
             </View>
             </View>
       )}

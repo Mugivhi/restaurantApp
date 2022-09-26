@@ -67,6 +67,7 @@ const styles = StyleSheet.create({
         backgroundColor:'#242422',
         justifyContent:'space-between',
         width:"100%",
+        position:'absolute',
         bottom:0,
         alignSelf:'baseline'
     },
